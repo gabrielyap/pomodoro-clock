@@ -3,6 +3,7 @@ function App(){
     const [breakTime, setBreakTime] = React.useState(10*60);
     const [sessionTime, setSessionTime] = React.useState(50*60);
     const [timerOn, setTimerOn] = React.useState(false);
+    const [onBreak, setOnBreak] = React.useState(false);
     const minsFormat = (time) =>{
         let mins = Math.floor(time / 60);
         let secs = time % 60;
@@ -44,10 +45,33 @@ function App(){
         
     };
     const controlTime = () =>{
+        let second = 1000;
+        let date = new Date().getTime();
+        let nextDate = new Date().getTime() + second;
+        let onBreakVariable = onBreak;
+        if (!timerOn){
+            let interval = setInterval(() => {
+                date = new Date().getTime();
+                if (date > nextDate){
+                    setDisplayTime(prev => {
+                        return prev - 1;
+                    })
+                    nextDate += second
+                }
+            }, 30);
+            localStorage.clear();
+            localStorage.setItem('interval-id', interval);
+        }
+        if (timerOn){
+            clearInterval(localStorage.getItem("interval-id"));
+        }
+        setTimerOn(!timerOn);
 
     };
     const resetTime = () =>{
-
+        setDisplayTime(50*60);
+        setBreakTime(10*60);
+        setSessionTime(50*60);
     };
     return(
         <div className = "center-align">
