@@ -1,15 +1,16 @@
 function App(){
-    const [displayTime, setDisplayTime] = React.useState(5);
+    const [displayTime, setDisplayTime] = React.useState(2);
     const [breakTime, setBreakTime] = React.useState(1);
-    const [sessionTime, setSessionTime] = React.useState(5);
+    const [sessionTime, setSessionTime] = React.useState(2);
     const [timerOn, setTimerOn] = React.useState(false);
     const [onBreak, setOnBreak] = React.useState(false);
     const {breakAudio, setBreakAudio} = React.useState(
-        new Audio("./break_time_sound.mp3")
+        new Audio("break_time_sound.mp3")
     );
-    const playBreakSound = () => {
-        // breakAudio.currentTime = 0;
-        breakAudio.play();
+    const playBreakSound = () => { //problem occurs when accessing audio
+        //breakAudio.currentTime = 0;
+        var myAudio = new Audio("./break_time_sound.mp3");
+        myAudio.play();
     }
     const minsFormat = (time) =>{
         let mins = Math.floor(time / 60);
@@ -62,13 +63,13 @@ function App(){
                 if (date > nextDate){
                     setDisplayTime((prev) => { //prev is currDisplay time
                         if (prev <= 0 && !onBreakVariable){
-                            // playBreakSound();
+                            playBreakSound(); //trouble area
                             onBreakVariable = true;
                             setOnBreak(true);
                             return breakTime;
                         }
                         else if (prev <= 0 && onBreakVariable){
-                            // playBreakSound();
+                            playBreakSound(); //trouble area
                             onBreakVariable = false;
                             setOnBreak(false);
                             return sessionTime

@@ -1,5 +1,0 @@
-When making react components, capitalize the first letter. Capitalized types indicate that the JSX tag is referring to a React component
-
-need REACTDOM before creating root
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
