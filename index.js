@@ -2,6 +2,7 @@ function App(){
     const [displayTime, setDisplayTime] = React.useState(50*60);
     const [breakTime, setBreakTime] = React.useState(10*60);
     const [sessionTime, setSessionTime] = React.useState(50*60);
+    const [timerOn, setTimerOn] = React.useState(false);
     const minsFormat = (time) =>{
         let mins = Math.floor(time / 60);
         let secs = time % 60;
@@ -26,28 +27,62 @@ function App(){
     };
     const changeTime = (amount, type) => {
         if (type == "break"){
+            if (breakTime <= 60 && amount < 0){ //differs
+                return;
+            }
             setBreakTime((prev) => prev + amount);
         }
+        else{
+            if (sessionTime <= 60 && amount < 0){ //differs
+                return;
+            }
+            setSessionTime((prev) => prev + amount);
+            if (!timerOn){
+            setDisplayTime(sessionTime + amount);
+        }
+        }
+        
+    };
+    const controlTime = () =>{
+
+    };
+    const resetTime = () =>{
+
     };
     return(
-        <div>
-            <Length
-            title = {"Break Length"} 
-            changeTime = {changeTime} 
-            type = {"break"} 
-            time = {breakTime} 
-            minsFormat = {minsFormat}
-            />
+        <div className = "center-align">
+            <h1>Pomodoro Clock</h1>
+            <div className = "dual-container">
+                <Length
+                title = {"Break Length"} 
+                changeTime = {changeTime} 
+                type = {"break"} 
+                time = {breakTime} 
+                minsFormat = {minsFormat}
+                />
+                
+                <Length
+                title = {"Session Length"} 
+                changeTime = {changeTime} 
+                type = {"session"} 
+                time = {sessionTime} 
+                minsFormat = {minsFormat}
+                />
+            </div>
             
-            <Length
-            title = {"Session Length"} 
-            changeTime = {changeTime} 
-            type = {"session"} 
-            time = {sessionTime} 
-            minsFormat = {minsFormat}
-            />
+            <h1>{minsFormat(displayTime)}</h1>
+            <button className = "btn-large deep-purple" onClick = {controlTime}>
+                {(timerOn) ?(
+                    <i className = "material-icons">pause_circle_filled</i>
+                )
+                :(
+                    <i className = "material-icons">play_circle_filled</i>
+                )}
+            </button>
+            <button className = "btn-large deep-purple" onClick = {resetTime}>
+                <i className = "material-icons">autorenew</i>
 
-            <h1>{minsFormat(displayTime)}</h1> 
+            </button>
         </div>
     );
 }
