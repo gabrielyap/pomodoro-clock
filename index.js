@@ -1,9 +1,16 @@
 function App(){
-    const [displayTime, setDisplayTime] = React.useState(50*60);
-    const [breakTime, setBreakTime] = React.useState(10*60);
-    const [sessionTime, setSessionTime] = React.useState(50*60);
+    const [displayTime, setDisplayTime] = React.useState(5);
+    const [breakTime, setBreakTime] = React.useState(1);
+    const [sessionTime, setSessionTime] = React.useState(5);
     const [timerOn, setTimerOn] = React.useState(false);
     const [onBreak, setOnBreak] = React.useState(false);
+    const {breakAudio, setBreakAudio} = React.useState(
+        new Audio("./break_time_sound.mp3")
+    );
+    const playBreakSound = () => {
+        // breakAudio.currentTime = 0;
+        breakAudio.play();
+    }
     const minsFormat = (time) =>{
         let mins = Math.floor(time / 60);
         let secs = time % 60;
@@ -53,7 +60,19 @@ function App(){
             let interval = setInterval(() => {
                 date = new Date().getTime();
                 if (date > nextDate){
-                    setDisplayTime(prev => {
+                    setDisplayTime((prev) => { //prev is currDisplay time
+                        if (prev <= 0 && !onBreakVariable){
+                            // playBreakSound();
+                            onBreakVariable = true;
+                            setOnBreak(true);
+                            return breakTime;
+                        }
+                        else if (prev <= 0 && onBreakVariable){
+                            // playBreakSound();
+                            onBreakVariable = false;
+                            setOnBreak(false);
+                            return sessionTime
+                        }
                         return prev - 1;
                     })
                     nextDate += second
@@ -93,7 +112,7 @@ function App(){
                 minsFormat = {minsFormat}
                 />
             </div>
-            
+            <h3>{onBreak ? "Break" : "Session"}</h3>
             <h1>{minsFormat(displayTime)}</h1>
             <button className = "btn-large deep-purple" onClick = {controlTime}>
                 {(timerOn) ?(
@@ -135,3 +154,4 @@ function Length({title, changeTime, type, time, minsFormat}){
 }
 const root = ReactDOM.createRoot(document.getElementById('root')); //need REACTDOM before createRoot
 root.render(<App />);
+// ReactDOM.render(<App />, document.getElementById("root"));
