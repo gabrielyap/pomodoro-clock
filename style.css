@@ -13,3 +13,14 @@ body{
     display: grid;
     justify-items: center;
 }
+#center-time{
+    font-size: 80px;
+    font-family: Calibri, Times New Roman, Times, serif;
+    font-weight: bold;
+}
+#play-reset{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}

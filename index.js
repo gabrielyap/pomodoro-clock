@@ -89,10 +89,28 @@ function App(){
         setBreakTime(10*60);
         setSessionTime(50*60);
     };
-    
     return(
         <div className = "center-align">
             <h1>Pomodoro Clock</h1>
+            
+            <h2>{onBreak ? "Break" : "Session"}</h2>
+            <h1>
+                <div id = "center-time"> {minsFormat(displayTime)}</div>
+            </h1>
+            <div id = "play-reset">
+            <button className = "btn-large deep-purple" onClick = {controlTime}>
+                {(timerOn) ?(
+                    <i className = "material-icons">pause_circle_filled</i>
+                )
+                :(
+                    <i className = "material-icons">play_circle_filled</i>
+                )}
+            </button>
+            <button className = "btn-large deep-purple" onClick = {resetTime}>
+                <i className = "material-icons">autorenew</i>
+
+            </button>
+            </div>
             <div className = "dual-container">
                 <Length
                 title = {"Break Length"} 
@@ -110,20 +128,6 @@ function App(){
                 minsFormat = {minsFormat}
                 />
             </div>
-            <h3>{onBreak ? "Break" : "Session"}</h3>
-            <h1>{minsFormat(displayTime)}</h1>
-            <button className = "btn-large deep-purple" onClick = {controlTime}>
-                {(timerOn) ?(
-                    <i className = "material-icons">pause_circle_filled</i>
-                )
-                :(
-                    <i className = "material-icons">play_circle_filled</i>
-                )}
-            </button>
-            <button className = "btn-large deep-purple" onClick = {resetTime}>
-                <i className = "material-icons">autorenew</i>
-
-            </button>
         </div>
     );
 }
@@ -134,7 +138,7 @@ function Length({title, changeTime, type, time, minsFormat}){
 
     return(
         <div>
-            <h3>{title}</h3>
+            <h4>{title}</h4>
             <div className = "time-sets">
                 <button className = "btn-small blue"//js function starts with {}, empty function() does expression =>
                     onClick = {() => changeTime(-300, type)} 
@@ -147,14 +151,14 @@ function Length({title, changeTime, type, time, minsFormat}){
                     <i className="material-icons">arrow_downward</i>
                 </button>
 
-                <h3>{minsFormat(time)}</h3>
+                <h4>{minsFormat(time)}</h4>
 
-                <button className = "btn-small red"
+                <button className = "btn-small blue"
                     onClick = {() => changeTime(60, type)}
                 >
                     <i className="material-icons">arrow_upward</i>
                 </button>
-                <button className = "btn-small red"
+                <button className = "btn-small blue"
                     onClick = {() => changeTime(300, type)}
                 >
                     <i className="material-icons">forward_5</i>
