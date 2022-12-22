@@ -91,8 +91,7 @@ function App(){
     };
     return(
         <div className = "center-align">
-            <h1>Pomodoro Clock</h1>
-            
+            <div id = "title"><h1>Pomodoro Clock</h1> </div>
             <h2>{onBreak ? "Break" : "Session"}</h2>
             <h1>
                 <div id = "center-time"> {minsFormat(displayTime)}</div>

@@ -1,6 +1,7 @@
 body{
     color: whitesmoke;
     background-color: midnightblue;
+    font-family: Georgia, 'Times New Roman', Times, sans-serif;
 }
 .time-sets{
     display: grid;
@@ -13,10 +14,11 @@ body{
     display: grid;
     justify-items: center;
 }
+
 #center-time{
     font-size: 80px;
-    font-family: Calibri, Times New Roman, Times, serif;
-    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;;
+    font-weight: 900px;
 }
 #play-reset{
     display: flex;
