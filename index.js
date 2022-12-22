@@ -4,11 +4,7 @@ function App(){
     const [sessionTime, setSessionTime] = React.useState(2);
     const [timerOn, setTimerOn] = React.useState(false);
     const [onBreak, setOnBreak] = React.useState(false);
-    const {breakAudio, setBreakAudio} = React.useState(
-        new Audio("break_time_sound.mp3")
-    );
-    const playBreakSound = () => { //problem occurs when accessing audio
-        //breakAudio.currentTime = 0;
+    const playBreakSound = () => {
         var myAudio = new Audio("./break_time_sound.mp3");
         myAudio.play();
     }
