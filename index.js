@@ -89,6 +89,7 @@ function App(){
         setBreakTime(10*60);
         setSessionTime(50*60);
     };
+    
     return(
         <div className = "center-align">
             <h1>Pomodoro Clock</h1>
@@ -127,13 +128,21 @@ function App(){
     );
 }
 
+
+  
 function Length({title, changeTime, type, time, minsFormat}){
+
     return(
         <div>
             <h3>{title}</h3>
             <div className = "time-sets">
-                <button className = "btn-small blue"
-                    onClick = {() => changeTime(-60, type)} //js function starts with {}, empty function() does expression =>
+                <button className = "btn-small blue"//js function starts with {}, empty function() does expression =>
+                    onClick = {() => changeTime(-300, type)} 
+                >
+                    <i className="material-icons">replay_5</i>
+                </button>
+                <button className = "btn-small blue"//js function starts with {}, empty function() does expression =>
+                    onClick = {() => changeTime(-60, type)} 
                 >
                     <i className="material-icons">arrow_downward</i>
                 </button>
@@ -145,10 +154,15 @@ function Length({title, changeTime, type, time, minsFormat}){
                 >
                     <i className="material-icons">arrow_upward</i>
                 </button>
+                <button className = "btn-small red"
+                    onClick = {() => changeTime(300, type)}
+                >
+                    <i className="material-icons">forward_5</i>
+                </button>
             </div>
         </div>
     );
 }
-const root = ReactDOM.createRoot(document.getElementById('root')); //need REACTDOM before createRoot
+const root = ReactDOM.createRoot(document.getElementById("root")); //need REACTDOM before createRoot
 root.render(<App />);
 // ReactDOM.render(<App />, document.getElementById("root"));
