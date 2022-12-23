@@ -1,7 +1,7 @@
 function App(){
-    const [displayTime, setDisplayTime] = React.useState(2);
-    const [breakTime, setBreakTime] = React.useState(1);
-    const [sessionTime, setSessionTime] = React.useState(2);
+    const [displayTime, setDisplayTime] = React.useState(25*60);
+    const [breakTime, setBreakTime] = React.useState(5*60);
+    const [sessionTime, setSessionTime] = React.useState(25*60);
     const [timerOn, setTimerOn] = React.useState(false);
     const [onBreak, setOnBreak] = React.useState(false);
     const playBreakSound = () => {
@@ -112,18 +112,18 @@ function App(){
             </div>
             <div className = "dual-container">
                 <Length
-                title = {"Break Length"} 
-                changeTime = {changeTime} 
-                type = {"break"} 
-                time = {breakTime} 
-                minsFormat = {minsFormat}
-                />
-                
-                <Length
                 title = {"Session Length"} 
                 changeTime = {changeTime} 
                 type = {"session"} 
                 time = {sessionTime} 
+                minsFormat = {minsFormat}
+                />
+                
+                <Length
+                title = {"Break Length"} 
+                changeTime = {changeTime} 
+                type = {"break"} 
+                time = {breakTime} 
                 minsFormat = {minsFormat}
                 />
             </div>
@@ -134,7 +134,6 @@ function App(){
 
   
 function Length({title, changeTime, type, time, minsFormat}){
-
     return(
         <div>
             <h4>{title}</h4>
@@ -144,13 +143,13 @@ function Length({title, changeTime, type, time, minsFormat}){
                 >
                     <i className="material-icons">replay_5</i>
                 </button>
-                <button className = "btn-small blue"//js function starts with {}, empty function() does expression =>
+                <button className = "btn-small blue"
                     onClick = {() => changeTime(-60, type)} 
                 >
                     <i className="material-icons">arrow_downward</i>
                 </button>
 
-                <h4>{minsFormat(time)}</h4>
+                <h4><div id = "settings-time"> {minsFormat(time)}</div></h4>
 
                 <button className = "btn-small blue"
                     onClick = {() => changeTime(60, type)}
