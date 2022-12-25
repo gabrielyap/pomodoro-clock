@@ -85,9 +85,9 @@ function App(){
 
     };
     const resetTime = () =>{
-        setDisplayTime(50*60);
-        setBreakTime(10*60);
-        setSessionTime(50*60);
+        setDisplayTime(25*60);
+        setBreakTime(5*60);
+        setSessionTime(25*60);
     };
     return(
         <div className = "center-align">
