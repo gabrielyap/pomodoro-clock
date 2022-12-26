@@ -59,13 +59,13 @@ function App(){
                 if (date > nextDate){
                     setDisplayTime((prev) => { //prev is currDisplay time
                         if (prev <= 0 && !onBreakVariable){
-                            playBreakSound(); //trouble area
+                            playBreakSound();
                             onBreakVariable = true;
                             setOnBreak(true);
                             return breakTime;
                         }
                         else if (prev <= 0 && onBreakVariable){
-                            playBreakSound(); //trouble area
+                            playBreakSound();
                             onBreakVariable = false;
                             setOnBreak(false);
                             return sessionTime
@@ -85,6 +85,7 @@ function App(){
 
     };
     const resetTime = () =>{
+        setOnBreak(false);
         setDisplayTime(25*60);
         setBreakTime(5*60);
         setSessionTime(25*60);
